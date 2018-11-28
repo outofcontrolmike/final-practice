@@ -1,0 +1,35 @@
+<div id="app">
+    <div v-for="task in tasks"><input type="checkbox">{{ task }} <span @click="removeThis(task)"> remove </span></div>  <!-- This loops each div -->
+    <input type="text" v-model="theText">
+    <button @click="addItem">Add Item</button>
+    <p v-if="numItems > 0"> Item count: {{ numItems}}</p>  <!-- This makes shopping cart not display when 0 items in cart-->
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+
+    var app = new Vue({
+        el:"#app",          // links Vue to the Div
+        data: {
+            numItems: 0,        // This starts the number of items at 0
+            theText: "",        // Starts it as empty
+            tasks: []       // an array that the inputs print to
+        },
+        methods: {          // these methods make adjustments to the shopping cart
+            addItem(){
+                console.log("this.theText")         
+                this.tasks.push(this.theText)
+                this.theText="Removed!"
+                this.numItems++
+            },
+            removeThis(anItem){    
+                var index = console.log(this.tasks.indexOf(anItem))    // 
+                this.tasks.splice(index,1)
+                this.numItems--
+            }
+    }
+    
+    });
+
+</script>
